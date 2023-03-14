@@ -1,58 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Imdifoods</title>
+    <link th:href="@{/images/logo.png}" rel="shortcut icon" type="image/png" >
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </head>
-<style>
-    .navbar {
-        background-color: #D40000;
-    }
-    .anchor{
-        margin: 6px;
-        background-color: #d9edf7;
-        border-color: #d9edf7;
-    }
-
-    input, label {
-        display:block;
-    }
-
-</style>
-
 <body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <h1>Imdifood</h1>
-            <div class="container">
-                <div th:if="*{userRole == 'USER'}">
-                    <nav th:replace="~{fragments/navbarUser :: navbarUser}"></nav>
-                </div>
-                <div th:if="*{userRole == 'ADMIN'}">
-                    <nav th:replace="~{fragments/navbarAdmin :: navbarAdmin}"></nav>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h4> Hi, Welcome <span th:text ="*{userDetails}"></span> you are <span th:text ="*{userRole}"></span> </h4></div>
-                    <div class="col-md-3">
-                        <a th:href="@{/logout}" class="btn anchor" style="margin-left:500px"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-
-<br><br><br><br><br><br><br>
-<!-- Create HTML registration form -->
-<div class="container">
-
+<div th:if="*{userRole == 'USER'}">
+    <nav th:replace="~{fragments/navbarUser :: navbarUser}"></nav>
 </div>
-
+<div th:if="*{userRole == 'ADMIN'}">
+    <nav th:replace="~{fragments/navbarAdmin :: navbarAdmin}"></nav>
+</div>
+<main class="flex flex-col justify-center h-screen">
+    <h1 class="text-3xl font-semibold text-center lg:text-4xl">
+        Selamat datang, </h1>
+    <h1 class="text-3xl font-semibold text-center lg:text-4xl" th:text ="*{userDetails}"></span>
+    </h1>
+</main>
 </body>
 </html>
