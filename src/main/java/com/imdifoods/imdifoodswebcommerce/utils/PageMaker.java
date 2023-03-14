@@ -1,7 +1,6 @@
 package com.imdifoods.imdifoodswebcommerce.utils;
 
 public class PageMaker {
-
     private int buttonsToShow = 5;
     private int startPage;
     private int endPage;
