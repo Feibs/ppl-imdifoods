@@ -29,6 +29,7 @@ public class ProductController {
             return "redirect:/product?page=1";
         }
 
+
         Page<Product> products = productService.getAllPageable(page, ITEM_COUNT);
         if (products.getTotalPages() < page) {
             return "redirect:/product?page=" + products.getTotalPages();

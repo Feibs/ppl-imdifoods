@@ -35,6 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-.env
-.scannerwork/
-tailwind.config.js
+.env!/.env
+!/.env
+/.env

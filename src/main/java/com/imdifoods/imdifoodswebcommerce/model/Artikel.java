@@ -7,7 +7,6 @@ import org.hibernate.Hibernate;
 import java.sql.Date;
 import java.util.Objects;
 
-@Generated
 @Getter
 @Setter
 @ToString
