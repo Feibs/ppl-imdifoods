@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tambah Produk - Imdifoods</title>
     <link th:href="@{/images/logo.png}" rel="shortcut icon" type="image/png" >
-    <link th:href="@{/style.css}" href="../static/style.css" rel="stylesheet" />
-    <link th:href="@{/css/createProduct.css}" href="../static/css/createProduct.css" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet" />
+    <link th:href="@{/css/form-product.css}" href="../static/css/form-product.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+<nav th:replace="~{fragments/navbarAdmin :: navbarAdmin}"></nav>
     <div class="flex justify-center py-11">
         <div class="w-[20rem] md:w-[40rem] lg:w-[60rem] border shadow-lg rounded p-6">
             <h1 class="text-3xl font-semibold lg:text-left">Tambah Produk</h1>

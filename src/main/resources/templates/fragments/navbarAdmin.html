@@ -1,14 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div th:fragment="navbarAdmin">
-        <div>
-            Hallo Admin
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<nav th:fragment="navbarAdmin"
+     class="fixed top-0 flex-no-wrap flex w-full items-center justify-between bg-[#D40000] py-2 shadow-lg shadow-gray lg:flex-wrap lg:justify-start"
+     data-te-navbar-ref>
+    <div class="flex w-full flex-wrap items-center justify-between px-6">
+        <!-- Hamburger menu on the left of mobile view -->
+        <button
+                class="block border-0 bg-transparent py-2 px-2.5 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 lg:hidden"
+                type="button"
+                data-te-collapse-init
+                data-te-target="#navbarSupportedContent1"
+                aria-controls="navbarSupportedContent1"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="[&>svg]:w-7">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="white"
+                            class="h-7 w-7">
+                    <path
+                            fill-rule="evenodd"
+                            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                            clip-rule="evenodd"/>
+                    </svg>
+                </span>
+        </button>
+
+        <!-- Expanded menu on the left of desktop view -->
+        <div class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
+             id="navbarSupportedContent1" data-te-collapse-item>
+            <!-- Logo -->
+            <a class="mt-2 mr-6 flex items-center lg:mt-0" href="/">
+                <img th:src="@{/images/logo.svg}" style="height: 2rem" alt="Home"/>
+            </a>
+            <!-- Link menu -->
+            <ul class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row" data-te-navbar-nav-ref>
+                <li class="py-2 lg:px-6" data-te-nav-item-ref>
+                    <a
+                            class="text-sm text-white font-bold hover:text-[#E0D517] focus:text-[#E0D517] disabled:text-black/30  lg:px-2 [&.active]:text-black/90"
+                            th:href="@{/product}"
+                            data-te-nav-link-ref>
+                        Produk
+                    </a>
+                </li>
+                <li class="py-2 lg:px-6" data-te-nav-item-ref>
+                    <a
+                            class="text-sm text-white font-bold hover:text-[#E0D517] focus:text-[#E0D517] disabled:text-black/30  lg:px-2 [&.active]:text-black/90"
+                            href="#"
+                            data-te-nav-link-ref>
+                        Pesanan
+                    </a>
+                </li>
+                <li class="py-2 lg:px-6" data-te-nav-item-ref>
+                    <a
+                            class="text-sm text-white font-bold hover:text-[#E0D517] focus:text-[#E0D517] disabled:text-black/30  lg:px-2 [&.active]:text-black/90"
+                            href="#"
+                            data-te-nav-link-ref>
+                        Artikel
+                    </a>
+                </li>
+                <li class="py-2 lg:px-6" data-te-nav-item-ref>
+                    <a
+                            class="text-sm text-white font-bold hover:text-[#E0D517] focus:text-[#E0D517] disabled:text-black/30  lg:px-2 [&.active]:text-black/90"
+                            href="#"
+                            data-te-nav-link-ref>
+                        Pesan Masuk
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Menu on the right -->
+        <div class="relative py-2 flex items-center">
+            <a th:href="@{/logout}">
+                <button class="font-semibold text-white text-sm rounded-2xl outline outline-white py-1.5 px-6 hover:bg-black hover:outline-0">
+                    Keluar
+                </button>
+            </a>
         </div>
     </div>
-</body>
+</nav>
 </html>

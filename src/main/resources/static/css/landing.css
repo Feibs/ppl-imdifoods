@@ -1,0 +1,187 @@
+header {
+    padding: 2rem 2rem 3rem 2rem;
+    text-align: justify;
+    background-image: url("../images/header-bg.svg");
+    background-repeat: no-repeat;
+}
+
+header h1 {
+    text-decoration: none;
+}
+
+.highlight {
+    color: var(--secondary-red);
+    font-weight: 600;
+}
+
+.benefit {
+    background-color: var(--secondary-red);
+    color: var(--primary-white);
+}
+
+.benefit h5 {
+    color: var(--primary-yellow);
+}
+
+.benefit-desc {
+    margin-left: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: start;
+    padding: 1rem 0;
+}
+
+.produk {
+    text-align: center;
+}
+
+.accent-img {
+    display: none;
+}
+
+.cara-memasak {
+    background-color: var(--secondary-red);
+}
+
+.cara-memasak h1 {
+    color: var(--primary-white);
+}
+
+iframe {
+    display: block;
+    margin: 2rem auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.artikel {
+    text-align: center;
+}
+
+.artikel-item {
+    padding: 2rem;
+}
+
+.social-media {
+    width: fit-content;
+    text-align: left;
+    padding: 1rem 0;
+}
+
+.social-media-item {
+    display: flex;
+    align-items: center;
+    font-size: smaller;
+}
+
+.social-media-item:hover, .social-media-item:active {
+    color: var(--primary-yellow);
+    cursor: pointer;
+}
+
+.social-media-item span {
+    margin: 0 0.5rem;
+}
+
+@media (min-width: 768px) {
+    header {
+        padding: 4rem 5rem 6rem 5rem;
+    }
+
+    .benefit-item {
+        align-items: center;
+    }
+
+    .cara-memasak {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .cara-memasak-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .cara-memasak h1 {
+        text-align: left;
+    }
+
+    iframe {
+        width: 380px;
+    }
+
+    .accent-img {
+        display: block;
+        position: absolute;
+        z-index: -1;
+    }
+
+    #accent-img-left {
+        top: 75rem;
+        left: 0;
+    }
+
+    #accent-img-right {
+        top: 65rem;
+        right: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    header {
+        padding: 4rem 15rem 5rem 15rem;
+    }
+
+    .benefit {
+        display: flex;
+        justify-content: center;
+    }
+
+    .benefit-column1 {
+        padding-right: 1.5rem;
+        width: 35rem;
+    }
+
+    .benefit-column2 {
+        padding-left: 1.5rem;
+        width: 35rem;
+    }
+
+    .benefit-item {
+        align-items: center;
+        padding: 2rem 0;
+    }
+
+    .benefit-img {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .produk h1 {
+        text-align: start;
+    }
+
+    iframe {
+        width: 560px;
+    }
+
+    .artikel-items {
+        display: flex;
+        justify-content: center;
+    }
+
+    .artikel-item img {
+        width: 12rem;
+    }
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        padding-right: 2rem;
+    }
+}
