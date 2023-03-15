@@ -1,7 +1,6 @@
 package com.imdifoods.imdifoodswebcommerce.service;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.Uploader;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
     @Override
     public String deleteImage(String imageId) {
         try {
-            Uploader uploader = cloudinary.uploader();
+            var uploader = cloudinary.uploader();
             return uploader.destroy(imageId, ObjectUtils.emptyMap()).toString();
         } catch (Exception e) {
             return null;

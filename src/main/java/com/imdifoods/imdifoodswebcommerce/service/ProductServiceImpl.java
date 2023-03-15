@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getAllPageable(int page, int itemPerPage) {
         if (page < 1) throw new NonPositivePageableException("Page must be greater than 0");
 
-        Pageable pageable = PageRequest.of(page - 1, itemPerPage);
+        Pageable pageable = PageRequest.of(page-1, itemPerPage);
         var pages = productRepository.findAll(pageable);
 
         if (pages.getTotalPages() != 0 && pages.getTotalPages() < page) {

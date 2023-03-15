@@ -108,7 +108,7 @@ class ProductServiceTest {
         int page = 2;
 
         List<Product> mockProducts = new ArrayList<>();
-        for (int i = 0; i < itemCount; i++) {
+        for (int i = 0; i< itemCount; i++) {
             mockProducts.add(new Product());
         }
 
