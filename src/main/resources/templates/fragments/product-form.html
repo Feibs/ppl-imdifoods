@@ -1,0 +1,60 @@
+<section class="p-0">
+    <div class="my-3">
+        <p class="font-semibold">Nama Produk</p>
+        <input class="product-input" maxlength="60" name="name" oninput="validity.valid||(value='');"
+               placeholder="Nama produk..."
+               required th:value="${name}" type="text">
+    </div>
+
+    <div class="my-3">
+        <p class="font-semibold">Foto Produk</p>
+        <div class="flex justify-center">
+            <label for="image-input">
+                <img alt="Selected Image" class="max-w-full w-96 h-auto cursor-pointer hidden" id="image-preview"
+                     src="#">
+            </label>
+        </div>
+        <div class="product-input border-dashed mx-auto text-center" id="image-upload">
+            <label for="image-input">
+                <div class="py-6 cursor-pointer">
+                    <em class="material-icons">upload</em>
+                    <p>Seret dan lepas dokumen di sini</p>
+                    <p class="font-light">atau</p>
+                    <p class="font-semibold">Cari Dokumen</p>
+                </div>
+            </label>
+            <input accept="image/*" class="w-full hidden" id="image-input" name="image"
+                   oninput="validity.valid||(value='');"
+                   type="file">
+        </div>
+    </div>
+    <div class="my-3">
+        <p class="font-semibold">Deskripsi</p>
+        <textarea class="product-input w-full resize-none" maxlength="1000" name="description"
+                  oninput="validity.valid||(value='');"
+                  placeholder="Deskripsi produk..." required rows="6" th:value="${description}"></textarea>
+    </div>
+    <div class="my-3">
+        <p class="font-semibold">Komposisi</p>
+        <textarea class="product-input w-full resize-none" maxlength="500" name="composition"
+                  oninput="validity.valid||(value='');" placeholder="Contoh: Komposisi pertama, komposisi kedua..."
+                  required rows="6" th:value="${composition}"></textarea>
+    </div>
+    <div class="my-3">
+        <p class="font-semibold">Harga</p>
+        <input class="border-2 border-black border-opacity-25 rounded p-1 my-2" id="price-input" max="100000000"
+               min="0" name="price" oninput="validity.valid||(value='');" placeholder="Contoh: 100000" required
+               th:value="${price}" type="number">
+    </div>
+
+    <div class="my-3">
+        <p class="font-semibold">Stok</p>
+        <input class="border-2 border-black border-opacity-25 rounded p-1 my-2" max="100000000" min="0" name="stock"
+               oninput="validity.valid||(value='');" placeholder="Contoh: 100" required th:value="${stock}"
+               type="number">
+    </div>
+    <div class="flex my-3 justify-center lg:justify-end">
+        <a class="bg-white secondary-btn" th:href="@{/product}"> Kembali</a>
+        <button class="bg-red-600 primary-btn" id="simpan-button" type="submit"> Simpan</button>
+    </div>
+</section>

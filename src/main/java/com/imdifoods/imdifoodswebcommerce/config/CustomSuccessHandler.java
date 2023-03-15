@@ -29,27 +29,26 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException, ServletException {
 
         String redirectUrl = null;
-        if(authentication.getPrincipal() instanceof DefaultOAuth2User) {
-            DefaultOAuth2User  userDetails = (DefaultOAuth2User ) authentication.getPrincipal();
-            String username = userDetails.getAttribute("email") !=null?userDetails.getAttribute("email"):userDetails.getAttribute("login")+"@gmail.com" ;
+        if (authentication.getPrincipal() instanceof DefaultOAuth2User userDetails) {
+            String username = userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login") + "@gmail.com";
             String[] arrOfStr = username.split("@");
-            if(userRepo.findByEmail(username) == null) {
+            if (userRepo.findByEmail(username) == null) {
                 UserRegisteredDTO user = new UserRegisteredDTO();
                 if (arrOfStr[0].equals("lmdifoodstaff")) {
                     user.setEmail_id(username);
-                    user.setName(userDetails.getAttribute("email") !=null?userDetails.getAttribute("email"):userDetails.getAttribute("login"));
+                    user.setName(userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login"));
                     user.setPassword(("Dummy"));
                     user.setRole("ADMIN");
-                }
-                else{
+                } else {
                     user.setEmail_id(username);
-                    user.setName(userDetails.getAttribute("email") !=null?userDetails.getAttribute("email"):userDetails.getAttribute("login"));
+                    user.setName(userDetails.getAttribute("email") != null ? userDetails.getAttribute("email") : userDetails.getAttribute("login"));
                     user.setPassword(("Dummy"));
                     user.setRole("USER");
                 }
                 userService.save(user);
             }
-        }  redirectUrl = "/dashboard";
+        }
+        redirectUrl = "/dashboard";
         new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <title>Imdifoods</title>
-    <link th:href="@{/images/logo.png}" rel="shortcut icon" type="image/png" >
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="shortcut icon" th:href="@{/images/logo.png}" type="image/png">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </head>
@@ -19,7 +19,7 @@
 <main class="flex flex-col justify-center h-screen">
     <h1 class="text-3xl font-semibold text-center lg:text-4xl">
         Selamat datang, </h1>
-    <h1 class="text-3xl font-semibold text-center lg:text-4xl" th:text ="*{userDetails}">
+    <h1 class="text-3xl font-semibold text-center lg:text-4xl" th:text="*{userDetails}">
     </h1>
 </main>
 </body>

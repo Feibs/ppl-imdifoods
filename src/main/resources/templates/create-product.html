@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Tambah Produk - Imdifoods</title>
+    <link rel="shortcut icon" th:href="@{/images/logo.png}" type="image/png">
+    <link href="../static/style.css" rel="stylesheet" th:href="@{/style.css}"/>
+    <link href="../static/css/form-product.css" rel="stylesheet" th:href="@{/css/form-product.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="../static/js/create-product.js" th:src="@{/js/create-product.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="flex justify-center py-11">
+    <div class="w-[20rem] md:w-[40rem] lg:w-[60rem] border shadow-lg rounded p-6">
+        <h1 class="text-3xl font-semibold lg:text-left">Tambah Produk</h1>
+        <form action="/product/add" enctype="multipart/form-data" id="product-form" method="post"
+              th:action="@{/product/add}">
+            <section th:replace="~{fragments/product-form}"></section>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" data-te-modal-init id="save-popup" tabindex="-1">
+    <div class="center-content">
+        <div class="popup-box shadow-lg" data-te-modal-dialog-ref>
+            <img alt="#" class="h-auto w-[70px]" id="popup-image" src="../static/images/question.png"
+                 th:src="@{/images/question.png}">
+            <h2>
+                Simpan produk baru?
+            </h2>
+            <div>
+                <button class="bg-white secondary-btn" data-te-modal-dismiss>
+                    Batal
+                </button>
+                <button class="confirm-button bg-red-600 primary-btn" data-te-ripple-color="success" data-te-ripple-init
+                        data-te-target="#confirmation-popup" data-te-toggle="modal" type="submit">
+                    Ya
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/confirmation-popup}"></div>
+</body>
+</html>

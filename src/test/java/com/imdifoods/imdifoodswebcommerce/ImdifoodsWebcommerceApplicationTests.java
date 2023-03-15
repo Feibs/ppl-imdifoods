@@ -10,7 +10,7 @@ class ImdifoodsWebcommerceApplicationTests {
 
     @Test
     void contextLoads() {
-        ImdifoodsWebcommerceApplication.main(new String[] {});
+        ImdifoodsWebcommerceApplication.main(new String[]{});
         assertTrue(true, "App test");
     }
 

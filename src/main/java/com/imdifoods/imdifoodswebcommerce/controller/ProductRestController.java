@@ -17,17 +17,27 @@ public class ProductRestController {
     private ProductService productService;
     @Autowired
     private CloudinaryService cloudinaryService;
+
     @PostMapping("/add")
     public Product saveProduct(@RequestParam("name") String name,
                                @RequestParam("description") String description,
+                               @RequestParam("composition") String composition,
                                @RequestParam("stock") int stock,
                                @RequestParam("price") Double price,
                                @RequestParam("image") MultipartFile imageFile) {
         Product product = null;
         String imageId = cloudinaryService.uploadImage(imageFile);
         if (imageId != null) {
-            product = productService.saveProduct(name, description, stock, price, imageId);
+            product = productService.saveProduct(name, description, composition, stock, price, imageId);
         }
         return product;
+    }
+
+    @PostMapping(value = "/delete")
+    public String deleteProduct(@RequestParam("id") int id) {
+        Product product = productService.getProductById(id);
+        cloudinaryService.deleteImage(product.getImageId());
+        productService.deleteProduct(id);
+        return "Product deleted";
     }
 }

@@ -11,16 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class MessageServiceTest {
-
-    @Autowired
-    MessageService messageService;
-
-    @MockBean
-    MessageRepository messageRepository;
+class MessageServiceTest {
 
     private final String SENDER_EMAIL = "test@gmail.com";
     private final String SENDER_MESSAGE = "this is a test message over here";
+    @Autowired
+    MessageService messageService;
+    @MockBean
+    MessageRepository messageRepository;
 
     @Test
     void testSaveMessage() {

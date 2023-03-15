@@ -9,21 +9,19 @@
         </div>
         <div class="social-media">
             <div class="social-media-item">
-                <img th:src="@{/images/contact-wa.svg}" alt="Whatsapp"/>
-                <a href="https://wa.me/87792492008" target="_blank"><span>0877-9249-2008</span></a>
+                <img alt="Whatsapp" th:src="@{/images/contact-wa.svg}"/>
+                <a href="https://wa.me/87792492008" rel="noopener" target="_blank"><span>0877-9249-2008</span></a>
             </div>
             <div class="social-media-item">
-                <img th:src="@{/images/contact-fb.svg}" alt="Facebook"/>
-                <a href="https://www.facebook.com/bumburendangpadang/"
-                   target="_blank"><span>Bumbu Rendang Imdifoods</span></a>
+                <img alt="Facebook" th:src="@{/images/contact-fb.svg}"/>
+                <a href="https://www.facebook.com/bumburendangpadang/" rel="noopener" target="_blank"><span>Bumbu Rendang Imdifoods</span></a>
             </div>
             <div class="social-media-item">
-                <img th:src="@{/images/contact-ig.svg}" alt="Instagram"/>
-                <a href="https://www.instagram.com/bumburendangpadangg/"
-                   target="_blank"><span>@bumburendangpadangg</span></a>
+                <img alt="Instagram" th:src="@{/images/contact-ig.svg}"/>
+                <a href="https://www.instagram.com/bumburendangpadangg/" rel="noopener" target="_blank"><span>@bumburendangpadangg</span></a>
             </div>
             <div class="social-media-item">
-                <img th:src="@{/images/contact-gmail.svg}" alt="GMail"/>
+                <img alt="GMail" th:src="@{/images/contact-gmail.svg}"/>
                 <a href="mailto:bumburendangpadangasli@gmail.com" target="_target"><span>bumburendangpadangasli@gmail.com</span></a>
             </div>
         </div>
@@ -33,20 +31,21 @@
             <h1 class="text-2xl font-semibold text-center py-6 px-0">Hubungi Kami</h1>
         </div>
 
-        <form id="form-message" class="form-message" action="">
+        <form action="" class="form-message" id="form-message">
             <div class="form-field">
-                <label for="sender-email" class="pt-4"><i>Email</i></label><br/>
-                <input type="email" required id="sender-email" name="sender-email"
-                       class="outline outline-gray-200 p-0.5 rounded-sm" placeholder="contoh: pengirim@mail.com"/><br/>
-                <label for="sender-message" class="pt-4">Pesan</label><br/>
-                <textarea required id="sender-message" name="sender-message"
-                          class="outline outline-gray-200 p-0.5 rounded-sm" placeholder="Pesan...." rows="5"></textarea>
+                <label class="pt-4" for="sender-email"><em>Email</em></label><br/>
+                <input class="outline outline-gray-200 p-0.5 rounded-sm" id="sender-email" name="sender-email"
+                       placeholder="contoh: pengirim@mail.com"
+                       required type="email"/><br/>
+                <label class="pt-4" for="sender-pesan">Pesan</label><br/>
+                <textarea class="outline outline-gray-200 p-0.5 rounded-sm" id="sender-pesan" name="sender-pesan"
+                          placeholder="Pesan...." required rows="5"></textarea>
             </div>
             <div class="form-button">
-                <button id="btn-submit" class="cta">Kirim</button>
+                <button class="cta" id="btn-submit">Kirim</button>
             </div>
         </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script th:src="@{/js/footer.js}" src="../../static/js/footer.js"></script>
+    <script src="../../static/js/footer.js" th:src="@{/js/footer.js}"></script>
 </footer>

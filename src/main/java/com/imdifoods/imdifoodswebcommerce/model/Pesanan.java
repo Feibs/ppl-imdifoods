@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 import java.sql.Date;
 import java.util.Objects;
 
+@Generated
 @Getter
 @Setter
 @ToString
@@ -37,7 +38,7 @@ public class Pesanan {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Pesanan pesanan = (Pesanan) o;
+        var pesanan = (Pesanan) o;
         return id != null && Objects.equals(id, pesanan.id);
     }
 

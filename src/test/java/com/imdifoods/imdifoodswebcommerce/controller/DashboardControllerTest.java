@@ -1,7 +1,5 @@
 package com.imdifoods.imdifoodswebcommerce.controller;
 
-import static org.mockito.Mockito.*;
-
 import com.imdifoods.imdifoodswebcommerce.model.Role;
 import com.imdifoods.imdifoodswebcommerce.model.User;
 import com.imdifoods.imdifoodswebcommerce.repository.UserRepository;
@@ -12,6 +10,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.ui.Model;
+
+import static org.mockito.Mockito.*;
 
 
 public class DashboardControllerTest {

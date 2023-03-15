@@ -15,22 +15,22 @@ public class PageMaker {
             setStartPage(1);
             setEndPage(totalPages);
 
-        // show first buttonsToShow pages
+            // show first buttonsToShow pages
         } else if (currentPage - halfPagesToShow <= 0) {
             setStartPage(1);
             setEndPage(getButtonsToShow());
 
-        // show halfPagesToShow pages before currentPage to totalPages
+            // show halfPagesToShow pages before currentPage to totalPages
         } else if (currentPage + halfPagesToShow == totalPages) {
             setStartPage(currentPage - halfPagesToShow);
             setEndPage(totalPages);
 
-        // show last buttonsToShow pages
+            // show last buttonsToShow pages
         } else if (currentPage + halfPagesToShow > totalPages) {
             setStartPage(totalPages - getButtonsToShow() + 1);
             setEndPage(totalPages);
 
-        // show halfPagesToShow pages before and after currentPage
+            // show halfPagesToShow pages before and after currentPage
         } else {
             setStartPage(currentPage - halfPagesToShow);
             setEndPage(currentPage + halfPagesToShow);
@@ -59,12 +59,12 @@ public class PageMaker {
         return this.startPage;
     }
 
-    public int getEndPage() {
-        return this.endPage;
-    }
-
     public void setStartPage(int startPage) {
         this.startPage = startPage;
+    }
+
+    public int getEndPage() {
+        return this.endPage;
     }
 
     public void setEndPage(int endPage) {
