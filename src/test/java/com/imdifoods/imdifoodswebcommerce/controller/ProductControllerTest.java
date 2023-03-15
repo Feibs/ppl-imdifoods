@@ -87,7 +87,7 @@ class ProductControllerTest {
     @WithMockUser
     void testGetAdminProductPageOnPageZeroNoProduct() throws Exception {
         Page<Product> mockProduct = new PageImpl<>(new ArrayList<>());
-        when(productService.getAllPageable(anyInt(), anyInt())).thenReturn(mockProduct);
+        when(productService.getAllPageable(anyInt(),anyInt())).thenReturn(mockProduct);
 
         mvc.perform(get("/product?page=0"))
                 .andExpect(status().isOk());

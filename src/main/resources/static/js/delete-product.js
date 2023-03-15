@@ -1,4 +1,4 @@
-import {hideElement, showElement} from "./visibility-modifier";
+import {hideElement, showElement} from "./visibility-modifier.js";
 
 $(function () {
     let id;
