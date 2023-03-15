@@ -1,6 +1,7 @@
 package com.imdifoods.imdifoodswebcommerce.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -9,8 +10,10 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "message")
 public class Message {
     @Id
@@ -18,11 +21,13 @@ public class Message {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "isi")
-    private String isi;
-
+    @NotBlank(message = "Email should not be blank")
     @Column(name = "email")
     private String email;
+
+    @NotBlank(message = "Message should not be blank")
+    @Column(name = "message")
+    private String message;
 
     @Override
     public boolean equals(Object o) {
@@ -35,5 +40,23 @@ public class Message {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public static MessageBuilder builder() {
+        return new CustomBuilder();
+    }
+
+    private static class CustomBuilder extends MessageBuilder {
+        public Message build() {
+            if (super.email == null || super.email.trim().length() == 0) {
+                throw new IllegalArgumentException("Email should not be blank!");
+            }
+
+            if (super.message == null || super.message.trim().length() == 0) {
+                throw new IllegalArgumentException("Message should not be blank!");
+            }
+
+            return super.build();
+        }
     }
 }
