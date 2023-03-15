@@ -38,3 +38,4 @@ out/
 .env
 .scannerwork/
 tailwind.config.js
+/node_modules/

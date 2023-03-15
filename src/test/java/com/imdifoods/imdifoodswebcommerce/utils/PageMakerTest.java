@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PageMakerTest {
 
     private final int buttonsCount = 5;
+
     @Test
     void testTotalLessEqualThanButtonsCount() {
         PageMaker pageMaker = new PageMaker(4, 1, buttonsCount);

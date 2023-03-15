@@ -1,0 +1,36 @@
+<div class="modal-overlay" data-te-backdrop="static" data-te-keyboard="false" data-te-modal-init id="confirmation-popup"
+     tabindex="-1">
+    <div class="center-content">
+        <div class="popup-box shadow-lg" data-te-modal-dialog-ref>
+            <div class="transition-opacity" id="loading-content">
+                <img alt="#" class="loader" id="loader" src="../static/images/loader.gif"
+                     th:src="@{/images/loader.gif}">
+                <h2>Mohon tunggu...</h2>
+            </div>
+            <div id="confirmation-popup-content">
+                <img alt="#" class="h-auto w-[70px]" src="../static/images/ok.png" th:src="@{/images/ok.png}">
+                <h2>
+                    Data berhasil tersimpan!
+                </h2>
+                <a class="bg-white secondary-btn" th:href="@{/product}">
+                    Kembali ke daftar
+                </a>
+                <button class="primary-btn" data-te-modal-dismiss id="add-new-button">
+                    Tambah baru
+                </button>
+            </div>
+            <div id="fail-popup-content">
+                <img alt="#" class="h-auto w-[70px]" src="../static/images/warning.png" th:src="@{/images/warning.png}">
+                <h2>
+                    Gagal menyimpan data.
+                </h2>
+                <button class="bg-white secondary-btn" data-te-modal-dismiss>
+                    Batal
+                </button>
+                <button class="confirm-button bg-red-600 primary-btn" type="submit">
+                    Kirim ulang
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,15 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @WebMvcTest(MessageController.class)
-public class MessageControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private MessageService messageService;
-
+class MessageControllerTest {
     private final String SENDER_EMAIL = "test@gmail.com";
     private final String SENDER_MESSAGE = "this is a test message over here";
+    @Autowired
+    private MockMvc mockMvc;
+    @MockBean
+    private MessageService messageService;
 
     @Test
     void postMessageTest() throws Exception {

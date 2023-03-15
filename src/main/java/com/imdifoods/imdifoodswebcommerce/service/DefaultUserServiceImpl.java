@@ -1,9 +1,5 @@
 package com.imdifoods.imdifoodswebcommerce.service;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.imdifoods.imdifoodswebcommerce.dto.UserRegisteredDTO;
 import com.imdifoods.imdifoodswebcommerce.model.Role;
 import com.imdifoods.imdifoodswebcommerce.model.User;
@@ -17,39 +13,37 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
-public class DefaultUserServiceImpl implements DefaultUserService{
+public class DefaultUserServiceImpl implements DefaultUserService {
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     private UserRepository userRepo;
-
     @Autowired
     private RoleRepository roleRepo;
-
-
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         User user = userRepo.findByEmail(email);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles){
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
     }
 
     @Override
     public User save(UserRegisteredDTO userRegisteredDTO) {
         Role role = roleRepo.findByRole(userRegisteredDTO.getRole());
-        if (role == null){
+        if (role == null) {
             role = Role.builder()
                     .role(userRegisteredDTO.getRole()).build();
             roleRepo.save(role);

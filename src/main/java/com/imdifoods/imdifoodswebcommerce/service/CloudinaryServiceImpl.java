@@ -13,10 +13,11 @@ import java.util.Map;
 public class CloudinaryServiceImpl implements CloudinaryService {
     @Autowired
     private Cloudinary cloudinary;
+
     @Override
     public String uploadImage(MultipartFile imageFile) {
         try {
-            Uploader uploader = cloudinary.uploader();
+            var uploader = cloudinary.uploader();
             Map<String, Object> uploadResult = uploader.upload(imageFile.getBytes(), ObjectUtils.emptyMap());
             return uploadResult.get("public_id").toString();
         } catch (Exception e) {
@@ -30,6 +31,16 @@ public class CloudinaryServiceImpl implements CloudinaryService {
             return cloudinary.url().secure(true).format("jpg")
                     .publicId(imageId)
                     .generate();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public String deleteImage(String imageId) {
+        try {
+            Uploader uploader = cloudinary.uploader();
+            return uploader.destroy(imageId, ObjectUtils.emptyMap()).toString();
         } catch (Exception e) {
             return null;
         }

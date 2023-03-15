@@ -21,33 +21,36 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @NotBlank(message="Name should not be blank")
+    @NotBlank(message = "Name should not be blank")
     private String name;
-    @NotBlank(message="Description should not be blank")
+    @NotBlank(message = "Description should not be blank")
     private String description;
+    @NotBlank(message = "Composition should not be blank")
+    private String composition;
     @NotNull
     @Min(0)
     private Integer stock;
     @NotNull
     @Min(0)
     private Double price;
-    @NotBlank(message="ImageId should not be blank")
+    @NotBlank(message = "ImageId should not be blank")
     private String imageId;
+
+    public static ProductBuilder builder() {
+        return new CustomBuilder();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Product product = (Product) o;
+        var product = (Product) o;
         return id != null && Objects.equals(id, product.id);
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public static ProductBuilder builder() {
-        return new CustomBuilder();
     }
 
     private static class CustomBuilder extends ProductBuilder {

@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
+@Generated
 @Getter
 @Setter
 @ToString
@@ -29,21 +30,21 @@ public class Message {
     @Column(name = "message")
     private String message;
 
+    public static MessageBuilder builder() {
+        return new CustomBuilder();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Message message = (Message) o;
+        var message = (Message) o;
         return id != null && Objects.equals(id, message.id);
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public static MessageBuilder builder() {
-        return new CustomBuilder();
     }
 
     private static class CustomBuilder extends MessageBuilder {

@@ -1,48 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Products</title>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Daftar Produk - Imdifoods</title>
+
+    <link rel="shortcut icon" th:href="@{/images/logo.png}" type="image/png">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin-products.css}"/>
+    <link href="../static/css/form-product.css" rel="stylesheet" th:href="@{/css/form-product.css}"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="../static/js/delete-product.js" th:src="@{/js/delete-product.js}"></script>
 </head>
 <body>
 
-<h1>Products</h1>
-<div th:if="${pageMaker.endPage == 0}">
-    No Data
-</div>
-<div th:unless="${pageMaker.endPage == 0}">
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Nama Produk</th>
-            <th>Harga</th>
-            <th>Stok</th>
-        </tr>
-        <tr th:each="product,itrStatus : ${products}" th:id="${product.id}">
-            <td th:text="${itrStatus.count + countStart}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.price}"></td>
-            <td th:text="${product.stock}"></td>
-        </tr>
-    </table>
-    <div th:if="${products.totalPages != 1}">
-        <p>
-            <span>
-                <a class="pageLink" th:href="@{/product(page=1)}">&laquo;</a>
-            </span>
-            <span>
-                <a class="pageLink" th:href="@{/product(page=${products.number})}">&larr;</a>
-            </span>
-            <span th:each="page : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
-                <a th:href="@{/product(page=${page})}" th:text="${page}"></a>
-            </span>
-            <span>
-                <a th:href="@{/product(page=${products.number + 2})}">&rarr;</a>
-            </span>
-            <span>
-                <a th:href="@{/product(page=${products.totalPages})}">&raquo;</a>
-            </span>
-        </p>
+<div class="root flex justify-center py-11">
+    <div class="w-11/12 border shadow-lg rounded p-6">
+        <h1 class="text-3xl font-semibold lg:text-left">Daftar Produk</h1>
+
+        <section class="flex justify-center md:justify-between w-full mt-10 flex-wrap" id="admin-product-bar">
+            <form class="flex search-container w-full md:w-9/12 lg:w-6/12 drop-shadow-md">
+                <input aria-label="search"
+                       class="p-1 w-full md:w-6/12 focus:outline-0 md:focus:w-10/12 md:duration-500 rounded-l-lg"
+                       id="search-product-bar"
+                       placeholder="Cari berdasarkan nama" type="search">
+                <div class="content"></div>
+                <button class="search-button" type="submit">
+                    <svg class="search-icon rounded-r-lg p-1.5 h-full" fill="#FFFFFF" stroke="#FFFFFF"
+                         viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27 24.57l-5.647-5.648a8.895 8.895 0 0 0 1.522-4.984C22.875 9.01 18.867 5 13.938 5 9.01 5 5 9.01 5 13.938c0 4.929 4.01 8.938 8.938 8.938a8.887 8.887 0 0 0 4.984-1.522L24.568 27 27 24.57zm-13.062-4.445a6.194 6.194 0 0 1-6.188-6.188 6.195 6.195 0 0 1 6.188-6.188 6.195 6.195 0 0 1 6.188 6.188 6.195 6.195 0 0 1-6.188 6.188z"></path>
+                    </svg>
+                </button>
+            </form>
+
+
+            <a class="w-fit add-button text-center mt-5 md:mt-0 py-2 px-5 text-white font-semibold rounded-xl drop-shadow-md"
+               th:href="@{/product/add}">Tambah
+                +</a>
+        </section>
+
+
+        <section id="product-list">
+            <div class="text-center text-xl font-bold mt-20 mb-10" th:id="page-content"
+                 th:if="${pageMaker.endPage == 0}">
+                <h3>No Data</h3>
+            </div>
+
+            <div class="p-3" th:id="page-content" th:unless="${pageMaker.endPage == 0}">
+                <table class="w-full table-fixed border-collapse text-center break-words">
+                    <caption class="hidden">Product Table</caption>
+                    <thead>
+                    <tr class="border-b-2 border-slate-100">
+                        <th class="py-3 w-2/12 md:w-1/12" scope="col">No</th>
+                        <th class="py-3 w-6/12 md:w-5/12 lg:w-5/12" scope="col">Nama Produk</th>
+                        <th class="py-3 w-3/12 hidden md:table-cell" scope="col">Harga</th>
+                        <th class="py-3 w-2/12 hidden md:table-cell" scope="col">Stok</th>
+                        <th class="py-3 w-4/12 md:w-2/12" scope="col">Aksi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="hover:bg-slate-50" th:each="product,itrStatus : ${products}" th:id="${product.id}">
+                        <td class="py-3" th:text="${itrStatus.count + countStart}"></td>
+                        <td class="py-3" th:text="${product.name}"></td>
+                        <td class="py-3 hidden md:table-cell" th:text="${product.price}"></td>
+                        <td class="py-3 hidden md:table-cell" th:text="${product.stock}"></td>
+                        <td class="py-3">
+                            <div class="flex justify-center">
+                                <a class="pencil-box border-2 rounded py-1.5 px-2 mx-1 md:mx-2 action-button">
+                                    <svg class="pencil" fill="none" height="1.25rem" viewBox="-2.4 -2.4 28.80 28.80"
+                                         width="1.25rem"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.0671 2.27157C17.5 2.09228 17.9639 2 18.4324 2C18.9009 2 19.3648 2.09228 19.7977 2.27157C20.2305 2.45086 20.6238 2.71365 20.9551 3.04493C21.2864 3.37621 21.5492 3.7695 21.7285 4.20235C21.9077 4.63519 22 5.09911 22 5.56761C22 6.03611 21.9077 6.50003 21.7285 6.93288C21.5492 7.36572 21.2864 7.75901 20.9551 8.09029L20.4369 8.60845L15.3916 3.56308L15.9097 3.04493C16.241 2.71365 16.6343 2.45086 17.0671 2.27157Z"
+                                              fill="#FFFFFF"></path>
+                                        <path d="M13.9774 4.9773L3.6546 15.3001C3.53154 15.4231 3.44273 15.5762 3.39694 15.7441L2.03526 20.7369C1.94084 21.0831 2.03917 21.4534 2.29292 21.7071C2.54667 21.9609 2.91693 22.0592 3.26314 21.9648L8.25597 20.6031C8.42387 20.5573 8.57691 20.4685 8.69996 20.3454L19.0227 10.0227L13.9774 4.9773Z"
+                                              fill="#FFFFFF"></path>
+                                    </svg>
+                                </a>
+
+                                <a class="delete-button trash-can-box border-2 rounded py-1.5 px-2 mx-1 md:mx-2 action-button">
+                                    <svg class="trash-can" fill="#D40000" height="1.25rem" stroke="#D40000"
+                                         viewBox="-6.7 0 122.88 122.88"
+                                         width="1.25rem"
+                                         xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                                    <path clip-rule="evenodd"
+                                          d="M2.347,9.633h38.297V3.76c0-2.068,1.689-3.76,3.76-3.76h21.144 c2.07,0,3.76,1.691,3.76,3.76v5.874h37.83c1.293,0,2.347,1.057,2.347,2.349v11.514H0V11.982C0,10.69,1.055,9.633,2.347,9.633 L2.347,9.633z M8.69,29.605h92.921c1.937,0,3.696,1.599,3.521,3.524l-7.864,86.229c-0.174,1.926-1.59,3.521-3.523,3.521h-77.3 c-1.934,0-3.352-1.592-3.524-3.521L5.166,33.129C4.994,31.197,6.751,29.605,8.69,29.605L8.69,29.605z M69.077,42.998h9.866v65.314 h-9.866V42.998L69.077,42.998z M30.072,42.998h9.867v65.314h-9.867V42.998L30.072,42.998z M49.572,42.998h9.869v65.314h-9.869 V42.998L49.572,42.998z"
+                                          fill-rule="evenodd">
+                                    </path>
+                                </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="flex justify-center md:justify-end h-15 py-3" th:if="${products.totalPages != 1}">
+                    <a class="mx-0.5 p-1" th:classappend="${currentPage == 1} ? 'disabled-arrows':''"
+                       th:href="@{/product(page=1)}">
+                        <svg class="arrows w-3 h-full" fill="#A8A8A8" stroke="#A8A8A8"
+                             viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1052 92.168 959.701 0-.234 959.935 959.701 1920l92.299-92.43-867.636-867.635L1052 92.168Z"></path>
+                            <path d="M1920 92.168 1827.7 0 867.766 959.935 1827.7 1920l92.3-92.43-867.64-867.635L1920 92.168Z"></path>
+                        </svg>
+                    </a>
+                    <a class="mx-0.5 p-1" th:classappend="${currentPage == 1} ? 'disabled-arrows':''"
+                       th:href="@{/product(page=${products.number})}">
+                        <svg class="arrows w-4 h-full" fill="#A8A8A8" viewBox="0 0 1920 1920"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M615.177 345 0 960.292l615.177 615.177 81.25-81.25-476.467-476.466H1920V902.83H219.96l476.467-476.58z"
+                                  fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <span class="my-auto" th:each="page : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+                        <a class="inline-block mx-0.5 h-7 w-8 font-bold text-center align-middle border-2 page-number"
+                           th:classappend="${page == currentPage} ? 'current-page':''"
+                           th:href="@{/product(page=${page})}"
+                           th:text="${page}">
+                        </a>
+                    </span>
+
+
+                    <a class="mx-0.5 p-1" th:classappend="${currentPage == products.totalPages} ? 'disabled-arrows':''"
+                       th:href="@{/product(page=${products.number+2})}">
+                        <svg class="arrows w-4 h-full" fill="#A8A8A8" stroke="#A8A8A8"
+                             viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m1304.824 345.002-81.25 81.249 476.466 476.582H0v114.922h1700.04l-476.466 476.465 81.25 81.25L1920 960.293z"
+                                  fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a class="mx-0.5 p-1" th:classappend="${currentPage == products.totalPages} ? 'disabled-arrows':''"
+                       th:href="@{/product(page=${products.totalPages})}">
+                        <svg class="arrows w-3 h-full" fill="#A8A8A8" viewBox="0 0 1920 1920"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 92.168 92.299 0l959.931 959.935L92.299 1920 0 1827.57l867.636-867.635L0 92.168Z"></path>
+                            <path d="M868 92.168 960.299 0l959.931 959.935L960.299 1920 868 1827.57l867.64-867.635L868 92.168Z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Modal -->
+        <div class="modal-overlay" data-te-modal-init id="delete-popup" tabindex="-1">
+            <div class="center-content">
+                <div class="popup-box shadow-lg" data-te-modal-dialog-ref>
+                    <img alt="#" class="h-auto w-[70px]" id="popup-image" src="../static/images/question.png"
+                         th:src="@{/images/question.png}">
+                    <h2>
+                        Hapus Data
+                    </h2>
+                    <div class="px-[1rem] text-center">
+                        <p>Anda yakin ingin menghapus data?</p>
+                    </div>
+                    <div>
+                        <button class="bg-white secondary-btn" data-te-modal-dismiss>
+                            Batal
+                        </button>
+                        <button class="confirm-button bg-red-600 primary-btn" data-te-ripple-color="success"
+                                data-te-ripple-init
+                                data-te-target="#confirmation-popup" data-te-toggle="modal" type="submit">
+                            Ya
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay" data-te-backdrop="static" data-te-keyboard="false" data-te-modal-init
+             id="confirmation-popup" tabindex="-1">
+            <div class="center-content">
+                <div class="popup-box shadow-lg" data-te-modal-dialog-ref>
+                    <div id="loading-content">
+                        <img alt="#" class="loader" id="loader" src="../static/images/loader.gif"
+                             th:src="@{/images/loader.gif}">
+                        <h2>Mohon tunggu...</h2>
+                    </div>
+                    <div id="confirmation-popup-content">
+                        <img alt="#" class="h-auto w-[70px]" src="../static/images/ok.png" th:src="@{/images/ok.png}">
+                        <h2>
+                            Data berhasil dihapus.
+                        </h2>
+                        <a class="primary-btn" data-te-modal-dismiss th:href="@{/product}">
+                            Tutup
+                        </a>
+                    </div>
+                    <div id="fail-popup-content">
+                        <img alt="#" class="h-auto w-[70px]" src="../static/images/warning.png"
+                             th:src="@{/images/warning.png}">
+                        <h2>
+                            Gagal menghapus data.
+                        </h2>
+                        <button class="bg-white secondary-btn" data-te-modal-dismiss>
+                            Batal
+                        </button>
+                        <button class="confirm-button bg-red-600 primary-btn" type="submit">
+                            Ulangi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
